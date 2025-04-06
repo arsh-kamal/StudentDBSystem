@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Student Database Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger mb-3">Logout</a>
+        <h2>Users</h2>
+        <ul class="list-group mb-4">
+            {% for user in users %}
+                <li class="list-group-item">{{ user[1] }} ({{ user[2] }}) - {{ user[3] }}</li>
+            {% endfor %}
+        </ul>
+        <h2>Send Message</h2>
+        <form method="POST" class="mb-4">
+            <div class="mb-3">
+                <label>Receiver ID:</label>
+                <input type="number" name="receiver_id" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label>Message:</label>
+                <input type="text" name="message" class="form-control" required>
+            </div>
+            <input type="submit" value="Send" class="btn btn-primary">
+        </form>
+        <h2>Messages</h2>
+        <ul class="list-group mb-4">
+            {% for msg in messages %}
+                <li class="list-group-item">From {{ msg[1] }} to {{ msg[2] }}: {{ msg[3] }}</li>
+            {% endfor %}
+        </ul>
+        <h2>AI Suggestions</h2>
+        <ul class="list-group">
+            {% for edge in suggestions %}
+                <li class="list-group-item">User {{ edge[0] }} ↔ User {{ edge[1] }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
